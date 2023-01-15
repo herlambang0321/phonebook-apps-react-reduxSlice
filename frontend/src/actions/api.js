@@ -109,8 +109,8 @@ const addUserRedux = (id, name, phone) => ({
 
 export const addUser = (name, phone) => {
     const id = Date.now()
-    return async (dispatch) => {
-        if (!dispatch(searchUser())) {
+    return async (dispatch, getState) => {
+        if (!dispatch(searchUser()) || !getState().users.params.query) {
             dispatch(addUserRedux(id, name, phone))
         }
         try {
